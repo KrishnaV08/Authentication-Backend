@@ -2,18 +2,23 @@
   "name": "authentication-app",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KrishnaV08/Authentication-Backend.git"
+  },
   "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KrishnaV08/Authentication-Backend/issues"
+  },
+  "homepage": "https://github.com/KrishnaV08/Authentication-Backend#readme",
   "dependencies": {
-    "bcrypt": "^5.1.0",
-    "body-parser": "^1.20.1",
-    "ejs": "^3.1.8",
     "express": "^4.18.2",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^6.7.2"
+    "mongoose": "^6.7.2",
+    "nodemon": "^2.0.20"
   }
 }

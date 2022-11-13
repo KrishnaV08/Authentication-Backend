@@ -1,31 +1,31 @@
-//jshint esversion:6
-
 const express = require("express");
-const bodyParser = require("body-parser");
-const ejs = require("ejs");
-const mongoose = require("mongoose");
-const bcrypt = require("bcrypt");
-
 const app = express();
+const studentRoute = require("./api/routes/student");
+const facultyRoute = require("./api/routes/faculty");
+const mongoose = require("mongoose");
 
-app.set("view engine", "ejs");
+mongoose.connect();
 
-app.use(
-  bodyParser.urlencoded({
-    extended: true,
-  })
-);
-app.use(express.static("public"));
-app.use(cookieParser());
-
-app.get("/logout", auth, async (req, res) => {
-  try {
-    console.log("logout successfully");
-  } catch (error) {
-    res.status(500).send(error);
-  }
+mongoose.connection.on("error", (err) => {
+  console.log("connection failed");
 });
 
-app.listen(3000, function () {
-  console.log("Server started on port 3000");
+mongoose.connection.on("connected", (err) => {
+  console.log("connected with database");
 });
+
+app.use("/student", studentRoute);
+app.use("/faculty", facultyRoute);
+
+app.use((req, res, next) => {
+  res.status(404).json({
+    error: "bad request",
+  });
+});
+app.use((req, res, next) => {
+  res.status(200).json({
+    message: "app is running",
+  });
+});
+
+module.exports = app;
