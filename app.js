@@ -3,8 +3,11 @@ const app = express();
 const studentRoute = require("./api/routes/student");
 const facultyRoute = require("./api/routes/faculty");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
-mongoose.connect();
+mongoose.connect(
+  "mongodb+srv://saumyxa:root@cluster0.qpakkuq.mongodb.net/?retryWrites=true&w=majority"
+);
 
 mongoose.connection.on("error", (err) => {
   console.log("connection failed");
@@ -13,6 +16,9 @@ mongoose.connection.on("error", (err) => {
 mongoose.connection.on("connected", (err) => {
   console.log("connected with database");
 });
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use("/student", studentRoute);
 app.use("/faculty", facultyRoute);
