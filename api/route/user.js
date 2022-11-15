@@ -3,8 +3,14 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const ejs = require("ejs");
+
+app.set("view engine", "ejs");
 
 const User = require("../model/user");
+const app = require("../../app");
+const submit = require("../views/index");
+
 
 router.post("/signup", (req, res, next) => {
   bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -65,7 +71,7 @@ router.post("/login", (req, res, next) => {
           );
           res.status(200).json({
             username: user[0].username,
-            phone:user[0].phone,
+            phone: user[0].phone,
             email: user[0].email,
             token: token,
           });
@@ -77,6 +83,10 @@ router.post("/login", (req, res, next) => {
         err: err,
       });
     });
+});
+
+router.post("/submit", (req, res) => {
+  const { username, phone, email } = req.body;
 });
 
 module.exports = router;
