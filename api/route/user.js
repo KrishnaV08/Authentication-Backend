@@ -3,14 +3,13 @@ const router = express.Router();
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const ejs = require("ejs");
+// const ejs = require("ejs");
 
-app.set("view engine", "ejs");
+// app.set();
 
 const User = require("../model/user");
 const app = require("../../app");
-const submit = require("../views/index");
-
+// const submit = require("../views/index");
 
 router.post("/signup", (req, res, next) => {
   bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -85,8 +84,8 @@ router.post("/login", (req, res, next) => {
     });
 });
 
-router.post("/submit", (req, res) => {
-  const { username, phone, email } = req.body;
-});
+// router.post("/submit", (req, res) => {
+//   const { username, phone, email } = req.body;
+// });
 
 module.exports = router;
